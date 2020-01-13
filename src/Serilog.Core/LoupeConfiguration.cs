@@ -5,8 +5,14 @@ using Serilog.Events;
 
 namespace Loupe.Serilog
 {
+    /// <summary>
+    /// Configuration for the Loupe Sink (independent of the Loupe Agent configuration)
+    /// </summary>
     public class LoupeConfiguration
     {
+        /// <summary>
+        /// Only record log events with this severity or higher.
+        /// </summary>
         public LogEventLevel RestrictedToMinimumLevel { get; set; }
 
         /// <summary>

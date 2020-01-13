@@ -6,6 +6,9 @@ using Serilog.Events;
 
 namespace Loupe.Serilog
 {
+    /// <summary>
+    /// Extension methods for Loupe
+    /// </summary>
     public static class LoupeExtensions
     {
         /// <summary>
