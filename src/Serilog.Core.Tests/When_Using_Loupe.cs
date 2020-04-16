@@ -97,5 +97,53 @@ namespace Loupe.Serilog.Core.Tests
                 log.Error("This is an error message about {methodInfo} and SHOULD be displayed", methodInfo);
             }
         }
+
+        [TestMethod]
+        public void Can_Specify_Category_As_Property()
+        {
+            var methodInfo = nameof(Can_Specify_Category_As_Property);
+
+            var categoryPropertyName = "LogCategory";
+
+            using (var log = new LoggerConfiguration()
+                .WriteTo.Loupe(categoryPropertyName: categoryPropertyName)
+                .CreateLogger())
+            {
+                log.ForContext(categoryPropertyName, methodInfo + ".Debug")
+                    .Debug("This is a debug message about {methodInfo} which should be in category {"+ categoryPropertyName + "}", methodInfo);
+
+                log.ForContext(categoryPropertyName, methodInfo + ".Verbose")
+                    .Verbose("This is a verbose message about {methodInfo} which should be in category {" + categoryPropertyName + "}", methodInfo);
+
+                log.ForContext(categoryPropertyName, methodInfo + ".Info")
+                    .Information("This is an informational message about {methodInfo} which should be in category {" + categoryPropertyName + "}", methodInfo);
+
+                log.ForContext(categoryPropertyName, methodInfo + ".Error")
+                    .Error("This is an error message about {methodInfo} which should be in category {" + categoryPropertyName + "}", methodInfo);
+            }
+        }
+
+        [TestMethod]
+        public void Can_Specify_Category_As_Missing_Property()
+        {
+            var methodInfo = nameof(Can_Specify_Category_As_Property);
+
+            using (var log = new LoggerConfiguration()
+                .WriteTo.Loupe(categoryPropertyName: "CategoryWeWillNotFind")
+                .CreateLogger())
+            {
+                log.ForContext("LoupeCategoryProperty", methodInfo + ".Debug")
+                    .Debug("This is a debug message about {methodInfo} which should be in the default category", methodInfo);
+
+                log.ForContext("LoupeCategoryProperty", methodInfo + ".Verbose")
+                    .Verbose("This is a verbose message about {methodInfo} which should be in the default category", methodInfo);
+
+                log.ForContext("LoupeCategoryProperty", methodInfo + ".Info")
+                    .Information("This is an informational message about {methodInfo} which should be in the default category", methodInfo);
+
+                log.ForContext("LoupeCategoryProperty", methodInfo + ".Error")
+                    .Error("This is an error message about {methodInfo} which should be in the default category", methodInfo);
+            }
+        }
     }
 }

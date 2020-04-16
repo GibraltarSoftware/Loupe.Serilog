@@ -121,7 +121,13 @@ namespace Loupe.Serilog
 
         private string ResolveCategoryFromLogEvent(LogEvent logEvent, string propertyName)
         {
-            var category = logEvent.Properties[propertyName].ToString() ?? "Serilog";
+            var category = "Serilog";
+
+            if (logEvent.Properties.TryGetValue(propertyName, out var value))
+            {
+                //render the property but with the string format l for literal to prevent Serilog adding quotes.
+                category = value?.ToString("l", null) ?? category;
+            }
 
             return category;
         }
