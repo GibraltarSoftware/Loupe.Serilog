@@ -1,5 +1,5 @@
 ﻿using System;
-using Loupe.Configuration;
+using Gibraltar.Agent.Configuration;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;

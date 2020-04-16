@@ -1,13 +1,10 @@
 ﻿using System;
 using System.IO;
-using Gibraltar.Monitor;
-using Loupe.Configuration;
+using Gibraltar.Agent;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting.Json;
-using Log = Gibraltar.Monitor.Log;
-using LogWriteMode = Gibraltar.Monitor.LogWriteMode;
-using LogMessageSeverity = Loupe.Extensibility.Data.LogMessageSeverity;
+using Gibraltar.Agent.Configuration;
 
 namespace Loupe.Serilog
 {
@@ -49,7 +46,7 @@ namespace Loupe.Serilog
             IFormatProvider formatProvider = null)
             : this(sinkConfiguration, formatProvider)
         {
-            Log.Initialize(loupeConfiguration);
+            Log.StartSession(loupeConfiguration);
         }
 
         /// <summary>
@@ -94,9 +91,8 @@ namespace Loupe.Serilog
             var sourceProvider = _configuration.IncludeCallLocation ? new SerilogMessageSourceProvider(logEvent, 2, false) : null; 
 
             // We pass a null for the user name so that Log.WriteMessage() will figure it out for itself.
-            Log.WriteMessage(severity, LogWriteMode.Queued, "Serilog", category,
-                sourceProvider, null, logEvent.Exception, 
-                details, logEvent.RenderMessage(_formatProvider), (string)null);
+            Log.Write(severity, "Serilog", sourceProvider, null, logEvent.Exception, LogWriteMode.Queued, 
+                 details, category, logEvent.RenderMessage(_formatProvider), (string)null);
         }
 
         private LogMessageSeverity ConvertLevelToSeverity(LogEventLevel level)
@@ -121,8 +117,7 @@ namespace Loupe.Serilog
 
         private string ResolveCategoryFromLogEvent(LogEvent logEvent, string propertyName)
         {
-            //render the property but with the string format l for literal to prevent Serilog adding quotes.
-            var category = logEvent.Properties[propertyName].ToString("l", null) ?? "Serilog";
+            var category = logEvent.Properties[propertyName].ToString() ?? "Serilog";
 
             return category;
         }

@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <AssemblyName>Loupe.Serilog.Core</AssemblyName>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <AssemblyName>Loupe.Serilog</AssemblyName>
     <RootNamespace>Loupe.Serilog</RootNamespace>
     <Version>4.8.0.0</Version>
     <FileVersion>4.8.0.0</FileVersion>
     <AssemblyVersion>4.8.0.0</AssemblyVersion>
     <Copyright>Copyright © 2008-2020 Gibraltar Software, Inc.</Copyright>
-    <Description>Serilog Sink for Loupe for .NET Standard.  Add Loupe.Serilog.Core to your project to route Serilog messages to Loupe.</Description>
+    <Description>Serilog Sink for Loupe for .NET Framework.  Add Loupe.Serilog to your project to route Serilog messages to Loupe.</Description>
     <Product>Loupe</Product>
     <Company>Gibraltar Software, Inc.</Company>
     <Authors>Gibraltar Software, Inc.</Authors>
@@ -22,15 +22,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\Loupe.Serilog.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Loupe.Serilog.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\Loupe.Serilog.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Loupe.Serilog.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Loupe.Agent.Core" Version="4.8.0.2" />
+    <PackageReference Include="Gibraltar.Agent" Version="4.9.2" />
     <PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>
 
