@@ -4,8 +4,8 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Loupe.Serilog.Core</AssemblyName>
     <RootNamespace>Loupe.Serilog</RootNamespace>
-    <Version>4.9.2.0</Version>
-    <FileVersion>4.9.2.0</FileVersion>
+    <Version>4.9.3.0</Version>
+    <FileVersion>4.9.3.0</FileVersion>
     <AssemblyVersion>4.8.0.0</AssemblyVersion>
     <Copyright>Copyright © 2008-2020 Gibraltar Software, Inc.</Copyright>
     <Description>Serilog Sink for Loupe for .NET Standard.  Add Loupe.Serilog.Core to your project to route Serilog messages to Loupe.</Description>
