@@ -145,5 +145,26 @@ namespace Loupe.Serilog.Core.Tests
                     .Error("This is an error message about {methodInfo} which should be in the default category", methodInfo);
             }
         }
+
+        [TestMethod]
+        public void Can_Split_Caption_And_Description()
+        {
+            var methodInfo = nameof(Can_Split_Caption_And_Description);
+
+            using (var log = new LoggerConfiguration()
+                .WriteTo.Loupe(restrictedToMinimumLevel: LogEventLevel.Information)
+                .CreateLogger())
+            {
+                log.Debug("This is a debug message about {methodInfo} and should NOT be displayed\r\n" +
+                          "But if it was, this would be in the description field.", methodInfo);
+                log.Verbose("This is a verbose message about {methodInfo} and should NOT be displayed\r\n" +
+                            "But if it was, this would be in the description field.", methodInfo);
+                log.Information("This is an informational message about {methodInfo} and SHOULD be displayed\r\n" +
+                                "But if it was, this would be in the description field.", methodInfo);
+                log.Error("This is an error message about {methodInfo} and SHOULD be displayed\r\n" +
+                          "But if it was, this would be in the description field.", methodInfo);
+
+            }
+        }
     }
 }

@@ -96,7 +96,7 @@ namespace Loupe.Serilog
             // We pass a null for the user name so that Log.WriteMessage() will figure it out for itself.
             Log.WriteMessage(severity, LogWriteMode.Queued, "Serilog", category,
                 sourceProvider, null, logEvent.Exception, 
-                details, logEvent.RenderMessage(_formatProvider), (string)null);
+                details, null, logEvent.RenderMessage(_formatProvider)); //write all in the description so Loupe wil do its own splitting.
         }
 
         private LogMessageSeverity ConvertLevelToSeverity(LogEventLevel level)
