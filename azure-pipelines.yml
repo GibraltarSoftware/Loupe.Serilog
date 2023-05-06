@@ -6,9 +6,9 @@ variables:
   agentSolution: 'src/Loupe.Serilog.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  major: 4
-  minor: 9
-  revision: 4
+  major: 5
+  minor: 0
+  revision: 0
   fileVersion: '$(Build.BuildNumber)'
 
 jobs:
